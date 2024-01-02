@@ -1,215 +1,91 @@
-#include "Student.h"
 #include <iostream>
 #include <vector>
-#include <cstring>
+#include "Student.h"
+
+
 using namespace std;
-int l(0);
-Student::Student(char* name, int course, int group, int number) : id(l++) {
-    this->course = course;
-    this->group = group;
-    this->name =new char[strlen(name)];
-    strcpy(this->name,name);
-    this->number=number;
-}
-Student::Student(const Student &F) : id(l++) {
-    this->course = F.course;
-    this->group = F.group;
-    this->number=F.number;
-    this->name = new char[strlen(F.name)];
-    strcpy(this->name,F.name);
-}
 
-int Student::get_course() const {
-    return course;
-}
+int main()
+{
+    vector<Student*> students;
 
-int Student::get_group() const {
-    return group;
-}
+    students.push_back(new Student("Ivanov Ivan", 1, 1, 1));
+    students.push_back(new StudentAfterFirstSession("Petrov Petr", 1, 1, 1, 4.5f, 5.0f, 3.5f, 4.0f));
+    students.push_back(new StudentAfterSecondSession("Sidorov Sergey", 1, 1, 1, 4.5f, 5.0f, 3.5f, 4.0f, 5.0f));
 
-int Student::get_id() {
-    return id;
-}
-
-int Student::get_number() const {
-    return number;
-}
-
-char * Student::get_name() const {
-    return name;
-}
-ostream &operator<<(ostream &out, Student F) {
-    cout << "Id: " << F.id << endl;
-    cout << "Name: " << F.name << endl;
-    cout << "Number: " << F.number<<endl;
-    cout <<"Group: " << F.group<<endl;
-    cout<<"Course: "<<F.course<<endl;
-    return out;
-}
-
-void Student::set_course(int a) {
-    this->course=a;
-}
-
-void Student::set_group(int a) {
-    this->group=a;
-}
-
-void Student::set_name(char* name) {
-    this->name =new char[strlen(name)];
-    strcpy(this->name,name);
-}
-
-char *Student::get_namecopy() const {
-    size_t len = strlen(name);
-    char* new_name = new char[len];
-    strcpy(new_name,name);
-    return new_name;
-}
-
-StudentAfterFirstSession::StudentAfterFirstSession(const Student &F, int a, int b, int c, int d): Student(F) {
-    marks[0]=a;
-    marks[1]=b;
-    marks[2]=c;
-    marks[3]=d;
-}
-
-StudentAfterFirstSession::StudentAfterFirstSession(const StudentAfterFirstSession &F): Student(F)  {
-    this->marks[0]=F.marks[0];
-    this->marks[1]=F.marks[1];
-    this->marks[2]=F.marks[2];
-    this->marks[3]=F.marks[3];
-}
-
-ostream &operator<<(ostream &out, const StudentAfterFirstSession& F) {\
-    cout << "Id: " << F.id << endl;
-    cout << "Name: ";
-    for(int i=0;i< strlen(F.name); i++) {
-        cout << F.name[i];
+    for (auto& student : students) {
+        cout << student << endl;
     }
-    cout << endl;
-    cout << "Number: " << F.number<<endl;
-    cout <<"Group: " << F.group<<endl;
-    cout<<"Course: "<<F.course<<endl;
-    cout <<"Marks after 1 session: ";
-    for (int i=0;i<4;i++) {
-        cout << F.marks[i]<<" ";
-    }
-    cout << endl;
-    return out;
+
+    return 0;
 }
 
-int StudentAfterFirstSession::get_1mark() const {
-    return marks[0];
+
+StudentAfterFirstSession::StudentAfterFirstSession(const char* name, int course, int group, int number, float grade1, float grade2, float grade3, float grade4) :
+        Student(name, course, group, number), grade1_(grade1), grade2_(grade2), grade3_(grade3), grade4_(grade4)
+{
 }
 
-int StudentAfterFirstSession::get_2mark() const {
-    return marks[1];
+StudentAfterFirstSession::~StudentAfterFirstSession()
+{
 }
 
-int StudentAfterFirstSession::get_3mark() const {
-    return marks[2];
+float StudentAfterFirstSession::getGrade1() const
+{
+    return grade1_;
 }
 
-int StudentAfterFirstSession::get_4mark() const {
-    return marks[3];
+void StudentAfterFirstSession::setGrade1(float grade1)
+{
+    grade1_ = grade1;
 }
 
-void StudentAfterFirstSession::set_1mark(int a) {
-    this->marks[0]=a;
+float StudentAfterFirstSession::getGrade2() const
+{
+    return grade2_;
 }
 
-void StudentAfterFirstSession::set_2mark(int b) {
-    this->marks[1]=b;
+void StudentAfterFirstSession::setGrade2(float grade2)
+{
+    grade2_ = grade2;
 }
 
-void StudentAfterFirstSession::set_3mark(int c) {
-    this->marks[2]=c;
+float StudentAfterFirstSession::getGrade3() const
+{
+    return grade3_;
 }
 
-void StudentAfterFirstSession::set_4mark(int d) {
-    this->marks[3]=d;
+void StudentAfterFirstSession::setGrade3(float grade3)
+{
+    grade3_ = grade3;
 }
 
-double StudentAfterFirstSession::get_avgMarkAft1session() {
-    double sum;
-    sum = marks[0]+marks[1]+marks[2]+marks[3];
-    return (sum/4);
+float StudentAfterFirstSession::getGrade4() const
+{
+    return grade4_;
 }
 
-ostream &operator<<(ostream &out, StudentAfterSecondSession F) {\
-    cout << "Id: " << F.id << endl;
-    cout << "Name: ";
-    for(int i=0;i< strlen(F.name); i++) {
-        cout << F.name[i];
-    }
-    cout << endl;
-    cout << "Number: " << F.number<<endl;
-    cout <<"Group: " << F.group<<endl;
-    cout<<"Course: "<<F.course<<endl;
-    cout <<"Marks after 1 session: ";
-    for (int i=0;i<4;i++) {
-        cout << F.marks[i]<<" ";
-    }
-    cout << endl;
-    cout <<"Marks after 2 session: ";
-    for (int i=0;i<5;i++) {
-        cout << F.nmarks[i]<<" ";
-    }
-    cout << endl;
-    return out;
+void StudentAfterFirstSession::setGrade4(float grade4)
+{
+    grade4_ = grade4;
 }
 
-StudentAfterSecondSession::StudentAfterSecondSession(const StudentAfterFirstSession &F, int a, int b, int c, int d, int e): StudentAfterFirstSession(F) {
-    this->nmarks[0]=a;
-    this->nmarks[1]=b;
-    this->nmarks[2]=c;
-    this->nmarks[3]=d;
-    this->nmarks[4]=e;
+
+StudentAfterSecondSession::StudentAfterSecondSession(const char* name, int course, int group, int number, float grade1, float grade2, float grade3, float grade4, float grade5) :
+        StudentAfterFirstSession(name, course, group, number, grade1, grade2, grade3, grade4), grade5_(grade5)
+{
 }
 
-int StudentAfterSecondSession::get_1nmark() {
-    return nmarks[0];
+StudentAfterSecondSession::~StudentAfterSecondSession()
+{
 }
 
-int StudentAfterSecondSession::get_2nmark() {
-    return nmarks[1];
+float StudentAfterSecondSession::getGrade5() const
+{
+    return grade5_;
 }
 
-int StudentAfterSecondSession::get_3nmark() {
-    return nmarks[2];
-}
-
-int StudentAfterSecondSession::get_4nmark() {
-    return nmarks[3];
-}
-
-int StudentAfterSecondSession::get_5nmark() {
-    return nmarks[4];
-}
-
-void StudentAfterSecondSession::set_1nmark(int a) {
-    this->nmarks[0]=a;
-}
-
-void StudentAfterSecondSession::set_2nmark(int b) {
-    this->nmarks[1]=b;
-}
-
-void StudentAfterSecondSession::set_3nmark(int c) {
-    this->nmarks[2]=c;
-}
-
-void StudentAfterSecondSession::set_4nmark(int d) {
-    this->nmarks[3]=d;
-}
-
-void StudentAfterSecondSession::set_5nmark(int e) {
-    this->nmarks[4]=e;
-}
-
-double StudentAfterSecondSession::get_avgMarkAft2session() {
-    double sum;
-    sum = marks[0]+marks[1]+marks[2]+marks[3]+nmarks[0]+nmarks[1]+nmarks[2]+nmarks[3]+nmarks[4];
-    return (sum/9);
+void StudentAfterSecondSession::setGrade5(float grade5)
+{
+    grade5_ = grade5;
 }

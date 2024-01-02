@@ -1,73 +1,22 @@
 #include <iostream>
-#include "Student.h"
 #include <vector>
-#include <cstring>
+#include "Student.h"
+
+
+
 using namespace std;
-void avgGroupAft1(vector <Student*> Students,int n) {
-    double avg(0);
-    int k(0);
-    for (int i=0;i<Students.size();i++) {
-        if (Students[i]->get_group()==n) {
-            avg+=Students[i]->getAvgMarkAfterFirstSession();
-            k+=1;
-        }
+
+int main()
+{
+    vector<Student*> students;
+
+    students.push_back(new Student("Ivanov Ivan", 1, 1, 1));
+    students.push_back(new StudentAfterFirstSession("Petrov Petr", 1, 1, 1, 4.5f, 5.0f, 3.5f, 4.0f));
+    students.push_back(new StudentAfterSecondSession("Sidorov Sergey", 1, 1, 1, 4.5f, 5.0f, 3.5f, 4.0f, 5.0f));
+
+    for (auto& student : students) {
+        cout << student << endl;
     }
-    if (k==0) {
-        cout << "Group "<<n<<" is empty."<<endl;
-    }
-    else {
-        cout <<"Average mark of the "<<n<<" group after 1 session is "<<(avg/k) <<endl;
-    }
-}
-void avgGroup(vector <Student*> Students) {
-    double avg(0);
-    int k(0);
-    for (int i=0;i<Students.size();i++) {
-        avg+=(Students[i]->getAvgMarkAfterFirstSession())*(4.0/9.0);
-        avg+=Students[i]->getAvgMarkAfterSecondSession()*(5.0/9.0);
-        k+=1;
-    }
-    if (k==0) {
-        cout << "Group is empty."<<endl;
-    }
-    else {
-        cout <<"Average mark is "<<(avg/k) <<endl;
-    }
-}
-void avgGroupAft2(vector <Student*> Students,int n) {
-    double avg(0);
-    int k(0);
-    for (int i=0;i<Students.size();i++) {
-        if (Students[i]->get_group()==n) {
-            avg+=Students[i]->getAvgMarkAfterSecondSession();
-            k+=1;
-        }
-    }
-    if (k==0) {
-        cout << "Group "<<n<<" is empty."<<endl;
-    }
-    else {
-        cout <<"Average mark of the "<<n<<" group atfer 2 session is "<<(avg/k) <<endl;
-    }
-}
-int main() {
-    vector<Student*> Students;
-    Student A("Alex",5,6,123);
-    StudentAfterFirstSession B("Alex",4,4,3,1,2,3,4);
-    StudentAfterFirstSession C(A,2,3,4,5);
-    StudentAfterSecondSession D(C,2,3,5,4,3);
-    cout<<A;
-    cout<<B;
-    cout<<C;
-    cout<<D;
-    Students.push_back(&A);
-    Students.push_back(&B);
-    Students.push_back(&C);
-    Students.push_back(&D);
-    avgGroupAft1(Students,6);
-    avgGroupAft1(Students,4);
-    avgGroupAft2(Students,4);
-    avgGroupAft2(Students,6);
-    avgGroup(Students);
+
     return 0;
 }
