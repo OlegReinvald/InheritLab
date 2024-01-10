@@ -1,65 +1,53 @@
-
+#pragma once
+#include <iostream>
+using namespace std;
 
 class Student {
+protected:
+    char* name;
+    int course;
+    int group;
+    const int recordBook;
+    static int UID;
+
 public:
-    Student(const char* name, int course, int group, int number);
-    ~Student();
-
-    const char* getName() const;
-    void setName(const char* name);
-
+    Student(char* _name, int _course, int _group);
+    Student(const Student& other);
+    Student() = delete;
+    void setName(char* name);
+    void setCourse(int _course);
+    void setGroup(int _group);
+    char* getName() const;
     int getCourse() const;
-    void setCourse(int course);
-
     int getGroup() const;
-    void setGroup(int group);
-
-    int getNumber() const;
-    void setNumber(int number);
-
-private:
-    unsigned long id_;
-    char* name_;
-    int course_;
-    int group_;
-    int number_;
+    virtual double Average();
+    friend ostream& operator<<(ostream& os, Student& student);
 };
 
 
-class StudentAfterFirstSession : public Student {
+class AfterSession1 : public Student {
+protected:
+    int grades1[4];
+
 public:
-    StudentAfterFirstSession(const char* name, int course, int group, int number, float grade1, float grade2, float grade3, float grade4);
-    ~StudentAfterFirstSession();
-
-    float getGrade1() const;
-    void setGrade1(float grade1);
-
-    float getGrade2() const;
-    void setGrade2(float grade2);
-
-    float getGrade3() const;
-    void setGrade3(float grade3);
-
-    float getGrade4() const;
-    void setGrade4(float grade4);
-
-private:
-    float grade1_;
-    float grade2_;
-    float grade3_;
-    float grade4_;
+    AfterSession1(char* _name, int _group, int _course, double _grades1[4]);
+    AfterSession1(Student& other, double _grades1[4]);
+    int getGrade_1(int i);
+    void changeGrade_1(int new_grade, int i);
+    friend ostream& operator<<(ostream& os, AfterSession1& student);
+    double Average() override;
 };
 
 
-class StudentAfterSecondSession : public StudentAfterFirstSession {
+class AfterSession2 : public AfterSession1 {
+protected:
+    int grades2[5];
+
 public:
-    StudentAfterSecondSession(const char* name, int course, int group, int number, float grade1, float grade2, float grade3, float grade4, float grade5);
-    ~StudentAfterSecondSession();
-
-    float getGrade5() const;
-    void setGrade5(float grade5);
-
-private:
-    float grade5_;
+    AfterSession2(char* _name, int _course, int _group, double _grades5[5], double _grades1[4]);
+    AfterSession2(AfterSession1& other, double _grades2[5]);
+    int getGrade_2(int i);
+    int changeGrade_2(double new_grade, int i);
+    friend ostream& operator<<(ostream& os, AfterSession2& student);
+    double Average() override;
 };
-
