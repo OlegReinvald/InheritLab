@@ -45,7 +45,7 @@ protected:
     int grades2[5];
 
 public:
-    AfterSession2(char* _name, int _course, int _group, double _grades5[5], double _grades1[4]);
+    AfterSession2(char* _name, int _course, int _group, double _grades2[5], double _grades1[4]);
     AfterSession2(AfterSession1& other, double _grades2[5]);
     int getGrade_2(int i);
     int changeGrade_2(double new_grade, int i);
