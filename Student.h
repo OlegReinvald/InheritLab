@@ -21,7 +21,7 @@ public:
     char* getName() const;
     int getCourse() const;
     int getGroup() const;
-    virtual double Average();
+
     friend ostream& operator<<(ostream& os, Student& student);
 };
 
@@ -36,7 +36,7 @@ public:
     int getGrade_1(int i);
     void changeGrade_1(int new_grade, int i);
     friend ostream& operator<<(ostream& os, AfterSession1& student);
-    double Average() override;
+    virtual double Average();
 };
 
 

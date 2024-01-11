@@ -2,7 +2,6 @@
 #include "student.h"
 using namespace std;
 
-static int UID = 0;
 
 Student::Student(char* _name, int _group, int _course ){
     course = _course;
