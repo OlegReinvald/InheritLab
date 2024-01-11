@@ -12,7 +12,7 @@ Student::Student(char* _name, int _group, int _course ):
 }
 
 Student::Student(const Student& other):
-    studentID(counterID), recordBook(studentID) {
+    UID(counterID), recordBook(studentID) {
     name = other.name;
     course = other.course;
     group = other.group;
