@@ -142,7 +142,7 @@ double AfterSession2::Average() {
 
     double sumAll = sum;
     for (int i = 0; i < 5; i++) {
-        sumAll += grades1[i];
+        sumAll += grades2[i];
     }
     return sumAll / 9.0;
 }
