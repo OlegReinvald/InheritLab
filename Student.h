@@ -7,8 +7,9 @@ protected:
     char* name;
     int course;
     int group;
-    const int recordBook;
-    static int UID;
+   // const int recordBook;
+   // static int UID;
+   //int counterID;
 
 public:
     Student(char* _name, int _course, int _group);

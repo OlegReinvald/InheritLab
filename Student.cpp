@@ -4,15 +4,13 @@ using namespace std;
 
 static int UID = 0;
 
-Student::Student(char* _name, int _group, int _course ):
-    UID(counterID++), recordBook(studentID) {
+Student::Student(char* _name, int _group, int _course ){
     course = _course;
     name = _name;
     group = _group;
 }
 
-Student::Student(const Student& other):
-    studentID(counterID), recordBook(studentID) {
+Student::Student(const Student& other){
     name = other.name;
     course = other.course;
     group = other.group;
@@ -82,9 +80,10 @@ ostream& operator<<(ostream& os, AfterSession1& student) {
        << "\n grades after first session: ";
     for (int i = 0; i < 4; i++) {
         os << student.grades1[i] << " ";
-    cout << "\n";
-        return os;
+        cout << "\n";
     }
+    return os;
+
 }
 
 double AfterSession1::Average() {
@@ -116,6 +115,7 @@ int AfterSession2::getGrade_2(int i) {
 
 int AfterSession2::changeGrade_2(double new_grade, int i) {
     grades2[i] = new_grade;
+    return grades2[i];
 }
 
 ostream& operator<<(ostream& os, AfterSession2& student) {
@@ -128,8 +128,9 @@ ostream& operator<<(ostream& os, AfterSession2& student) {
     for (int i = 0; i < 4; i++) {
         os << student.grades2[i] << " ";
         cout << "\n";
-        return os;
     }
+    return os;
+
 }
 
 double AfterSession2::Average() {
